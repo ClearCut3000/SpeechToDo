@@ -13,6 +13,9 @@
 		36E92C6828D4B9EF0058C7E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36E92C6728D4B9EF0058C7E5 /* Preview Assets.xcassets */; };
 		36E92C6A28D4B9EF0058C7E5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C6928D4B9EF0058C7E5 /* Persistence.swift */; };
 		36E92C6D28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C6B28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld */; };
+		36E92C7828D4EEE00058C7E5 /* MicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C7728D4EEE00058C7E5 /* MicManager.swift */; };
+		36E92C7A28D4F5610058C7E5 /* VisualBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C7928D4F5610058C7E5 /* VisualBarView.swift */; };
+		36E92C7D28D4FD750058C7E5 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C7C28D4FD750058C7E5 /* SpeechManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		36E92C6728D4B9EF0058C7E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		36E92C6928D4B9EF0058C7E5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		36E92C6C28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SpeechToDo.xcdatamodel; sourceTree = "<group>"; };
+		36E92C7728D4EEE00058C7E5 /* MicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicManager.swift; sourceTree = "<group>"; };
+		36E92C7928D4F5610058C7E5 /* VisualBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualBarView.swift; sourceTree = "<group>"; };
+		36E92C7C28D4FD750058C7E5 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,8 @@
 		36E92C5F28D4B9E70058C7E5 /* SpeechToDo */ = {
 			isa = PBXGroup;
 			children = (
+				36E92C7B28D4FD5E0058C7E5 /* SpeechManager */,
+				36E92C7628D4EEBD0058C7E5 /* SpeechVisualisation */,
 				36E92C7528D4BB6F0058C7E5 /* PersistenceManager */,
 				36E92C7428D4BB5B0058C7E5 /* View's */,
 				36E92C7328D4BB060058C7E5 /* App */,
@@ -95,6 +103,23 @@
 				36E92C6B28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld */,
 			);
 			path = PersistenceManager;
+			sourceTree = "<group>";
+		};
+		36E92C7628D4EEBD0058C7E5 /* SpeechVisualisation */ = {
+			isa = PBXGroup;
+			children = (
+				36E92C7728D4EEE00058C7E5 /* MicManager.swift */,
+				36E92C7928D4F5610058C7E5 /* VisualBarView.swift */,
+			);
+			path = SpeechVisualisation;
+			sourceTree = "<group>";
+		};
+		36E92C7B28D4FD5E0058C7E5 /* SpeechManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E92C7C28D4FD750058C7E5 /* SpeechManager.swift */,
+			);
+			path = SpeechManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,10 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E92C7A28D4F5610058C7E5 /* VisualBarView.swift in Sources */,
+				36E92C7828D4EEE00058C7E5 /* MicManager.swift in Sources */,
 				36E92C6A28D4B9EF0058C7E5 /* Persistence.swift in Sources */,
 				36E92C6D28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld in Sources */,
 				36E92C6328D4B9E70058C7E5 /* ContentView.swift in Sources */,
 				36E92C6128D4B9E70058C7E5 /* SpeechToDoApp.swift in Sources */,
+				36E92C7D28D4FD750058C7E5 /* SpeechManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +328,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SpeechToDo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = CJ7JF497NG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -331,7 +359,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SpeechToDo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = CJ7JF497NG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
