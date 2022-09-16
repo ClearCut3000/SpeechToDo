@@ -55,12 +55,9 @@
 		36E92C5F28D4B9E70058C7E5 /* SpeechToDo */ = {
 			isa = PBXGroup;
 			children = (
-				36E92C6028D4B9E70058C7E5 /* SpeechToDoApp.swift */,
-				36E92C6228D4B9E70058C7E5 /* ContentView.swift */,
-				36E92C6428D4B9EF0058C7E5 /* Assets.xcassets */,
-				36E92C6928D4B9EF0058C7E5 /* Persistence.swift */,
-				36E92C6B28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld */,
-				36E92C6628D4B9EF0058C7E5 /* Preview Content */,
+				36E92C7528D4BB6F0058C7E5 /* PersistenceManager */,
+				36E92C7428D4BB5B0058C7E5 /* View's */,
+				36E92C7328D4BB060058C7E5 /* App */,
 			);
 			path = SpeechToDo;
 			sourceTree = "<group>";
@@ -71,6 +68,33 @@
 				36E92C6728D4B9EF0058C7E5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		36E92C7328D4BB060058C7E5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				36E92C6628D4B9EF0058C7E5 /* Preview Content */,
+				36E92C6428D4B9EF0058C7E5 /* Assets.xcassets */,
+				36E92C6028D4B9E70058C7E5 /* SpeechToDoApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		36E92C7428D4BB5B0058C7E5 /* View's */ = {
+			isa = PBXGroup;
+			children = (
+				36E92C6228D4B9E70058C7E5 /* ContentView.swift */,
+			);
+			path = "View's";
+			sourceTree = "<group>";
+		};
+		36E92C7528D4BB6F0058C7E5 /* PersistenceManager */ = {
+			isa = PBXGroup;
+			children = (
+				36E92C6928D4B9EF0058C7E5 /* Persistence.swift */,
+				36E92C6B28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld */,
+			);
+			path = PersistenceManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
