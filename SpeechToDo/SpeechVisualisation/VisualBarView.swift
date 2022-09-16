@@ -20,7 +20,7 @@ struct VisualBarView: View {
           .fill(LinearGradient(gradient: Gradient(colors: [.green, .blue]),
                                startPoint: .top,
                                endPoint: .bottom))
-          .frame(width: UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 10 / CGFloat(numberOfSamples),
+          .frame(width: (UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 10) / CGFloat(numberOfSamples),
                  height: value)
       }
     }
