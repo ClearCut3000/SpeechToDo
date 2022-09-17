@@ -26,11 +26,19 @@ struct ContentView: View {
       ZStack(alignment: .bottomTrailing) {
         List {
           ForEach(todos) { item in
-            Text(item.text ?? " - E M P T Y - ")
+            HStack {
+              Image(systemName: "\(todos.firstIndex(of: item) ?? 0).circle.fill")
+              VStack {
+                Text(item.text ?? " - E M P T Y - ")
+                Text(item.created?.formatted(date: .numeric, time: .shortened) ?? "n/a")
+              }
+            }
           }
           .onDelete(perform: deleteItems)
         }
+        .listStyle(.plain)
         .navigationTitle("SpeechToDo List")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           EditButton()
             .simultaneousGesture(TapGesture().onEnded({
