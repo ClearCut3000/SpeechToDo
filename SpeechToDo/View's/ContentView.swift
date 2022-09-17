@@ -15,6 +15,7 @@ struct ContentView: View {
   @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Todo.created, ascending: true)], animation: .default) private var todos: FetchedResults<Todo>
 
   @State private var recording = false
+  @State private var isEditing = false
 
   @ObservedObject private var mic = MicMonitor(numberOfSamples: 30)
 
@@ -23,34 +24,48 @@ struct ContentView: View {
   //MARK: - View Body
   var body: some View {
     NavigationView {
-      ZStack(alignment: .bottomTrailing) {
+      ZStack(alignment: .bottom) {
         List {
           ForEach(todos) { item in
             HStack {
               Image(systemName: "\(todos.firstIndex(of: item) ?? 0).circle.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.red)
               VStack {
                 Text(item.text ?? " - E M P T Y - ")
+                  .font(.headline)
                 Text(item.created?.formatted(date: .numeric, time: .shortened) ?? "n/a")
+                  .font(.subheadline)
               }
             }
           }
           .onDelete(perform: deleteItems)
         }
+        .disabled(speechManager.isRecording)
+        .environment(\.editMode, .constant((todos.count != 0 && isEditing) ? EditMode.active : EditMode.inactive))
         .listStyle(.plain)
         .navigationTitle("SpeechToDo List")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          EditButton()
-            .simultaneousGesture(TapGesture().onEnded({
-              //TODO: -
-            }))
+          Button {
+            isEditing.toggle()
+          } label: {
+            Image(systemName: "pencil")
+              .foregroundColor(isEditing ? .red : .green)
+          }
+            .disabled(todos.count == 0 || recording)
         }
         RoundedRectangle(cornerRadius: 25)
           .fill(Color.black.opacity(0.7))
-          .padding()
+          .frame(maxWidth: UIScreen.main.bounds.size.width - 20 ,maxHeight: 300)
+          .overlay(RoundedRectangle(cornerRadius: 25)
+                    .strokeBorder(Color.secondary)
+          )
           .overlay(VStack {
             visualizerView()
           })
+          .padding(.bottom, UIScreen.main.bounds.size.width / 2)
           .opacity(recording ? 1 : 0)
         VStack {
           recordButton()
@@ -67,10 +82,16 @@ struct ContentView: View {
     Button {
       addItem()
     } label: {
-      Image(systemName: recording ? "stop.fill" : "mic.fill")
-        .font(.system(size: 40))
-        .padding()
-        .cornerRadius(10)
+        Image(systemName: recording ? "stop.fill" : "mic.fill")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 30, height: 30)
+          .padding(10)
+          .background(Color(UIColor.systemBackground))
+          .clipShape(RoundedRectangle(cornerRadius: 30))
+          .overlay(RoundedRectangle(cornerRadius: 30)
+                    .stroke(lineWidth: recording ? 5 : 2)
+                    .foregroundColor(recording ? .red : .secondary))
     }
     .foregroundColor(.red)
   }

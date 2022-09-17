@@ -17,7 +17,7 @@ struct VisualBarView: View {
     var body: some View {
       ZStack {
         RoundedRectangle(cornerRadius: 20)
-          .fill(LinearGradient(gradient: Gradient(colors: [.green, .blue]),
+          .fill(LinearGradient(gradient: Gradient(colors: [.red, .blue]),
                                startPoint: .top,
                                endPoint: .bottom))
           .frame(width: (UIScreen.main.bounds.width - CGFloat(numberOfSamples) * 10) / CGFloat(numberOfSamples),
