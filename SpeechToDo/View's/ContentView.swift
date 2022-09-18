@@ -16,6 +16,7 @@ struct ContentView: View {
 
   @State private var recording = false
   @State private var isEditing = false
+  @State private var selectedLanguage = Language.current
 
   @ObservedObject private var mic = MicMonitor(numberOfSamples: 30)
 
@@ -30,7 +31,8 @@ struct ContentView: View {
             HStack {
               Image(systemName: "\(todos.firstIndex(of: item) ?? 0).circle.fill")
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: 40, height: 40)
+                .padding(.trailing, 10)
                 .foregroundColor(.red)
               VStack {
                 Text(item.text ?? " - E M P T Y - ")
@@ -46,7 +48,18 @@ struct ContentView: View {
         .environment(\.editMode, .constant((todos.count != 0 && isEditing) ? EditMode.active : EditMode.inactive))
         .listStyle(.plain)
         .navigationTitle("SpeechToDo List")
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Picker("Language", selection: $selectedLanguage) {
+              Text("\(Language.current.prefix(2).capitalized)").tag(Language.current)
+              Text("En").tag("en_US")
+              Text("De").tag("de_DE")
+              Text("It").tag("it_IT")
+              Text("Fr").tag("fr_FR")
+            }
+            .pickerStyle(SegmentedPickerStyle())
+          }
+        }
         .toolbar {
           Button {
             isEditing.toggle()
@@ -91,7 +104,8 @@ struct ContentView: View {
           .clipShape(RoundedRectangle(cornerRadius: 30))
           .overlay(RoundedRectangle(cornerRadius: 30)
                     .stroke(lineWidth: recording ? 5 : 2)
-                    .foregroundColor(recording ? .red : .secondary))
+                    .foregroundColor(recording ? .red : .secondary)
+          )
     }
     .foregroundColor(.red)
   }
@@ -104,6 +118,7 @@ struct ContentView: View {
     } else {
       self.recording = true
       mic.startMonitoring()
+      speechManager.locale = Locale(identifier: selectedLanguage)
       speechManager.start { speechText in
         guard let text = speechText, !text.isEmpty else {
           self.recording = false
