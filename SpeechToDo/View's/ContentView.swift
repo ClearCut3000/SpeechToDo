@@ -14,8 +14,10 @@ struct ContentView: View {
   @Environment(\.managedObjectContext) private var viewContext
   @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Todo.created, ascending: true)], animation: .default) private var todos: FetchedResults<Todo>
 
+  @State private var editMode = EditMode.inactive
+
   @State private var recording = false
-  @State private var isEditing = false
+
   @State private var selectedLanguage = Language.current
 
   @ObservedObject private var mic = MicMonitor(numberOfSamples: 30)
@@ -38,16 +40,19 @@ struct ContentView: View {
                 Text(item.text ?? " - E M P T Y - ")
                   .font(.headline)
                 Text(item.created?.formatted(date: .numeric, time: .shortened) ?? "n/a")
-                  .font(.subheadline)
+                  .font(.caption2)
               }
             }
           }
           .onDelete(perform: deleteItems)
         }
         .disabled(speechManager.isRecording)
-        .environment(\.editMode, .constant((todos.count != 0 && isEditing) ? EditMode.active : EditMode.inactive))
-        .listStyle(.plain)
-        .navigationTitle("SpeechToDo List")
+        .environment(\.editMode, $editMode)
+        .onChange(of: todos.count, perform: { newValue in
+          if todos.isEmpty && editMode == .active {
+            editMode = .inactive
+          }
+        })
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             Picker("Language", selection: $selectedLanguage) {
@@ -58,17 +63,25 @@ struct ContentView: View {
               Text("Fr").tag("fr_FR")
             }
             .pickerStyle(SegmentedPickerStyle())
+            .colorMultiply(.red)
+            .disabled(recording)
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              if editMode == .active {
+                editMode = .inactive
+              } else {
+                editMode = .active
+              }
+            } label: {
+              Image(systemName: !todos.isEmpty ? "pencil" : "pencil.slash")
+                .foregroundColor((editMode == .active || todos.isEmpty) ? .red : .green)
+            }
+            .disabled(todos.isEmpty || recording)
           }
         }
-        .toolbar {
-          Button {
-            isEditing.toggle()
-          } label: {
-            Image(systemName: "pencil")
-              .foregroundColor(isEditing ? .red : .green)
-          }
-            .disabled(todos.count == 0 || recording)
-        }
+        .listStyle(.plain)
+        .navigationTitle("SpeechToDo List")
         RoundedRectangle(cornerRadius: 25)
           .fill(Color.black.opacity(0.7))
           .frame(maxWidth: UIScreen.main.bounds.size.width - 20 ,maxHeight: 300)
@@ -95,17 +108,17 @@ struct ContentView: View {
     Button {
       addItem()
     } label: {
-        Image(systemName: recording ? "stop.fill" : "mic.fill")
-          .resizable()
-          .scaledToFit()
-          .frame(width: 30, height: 30)
-          .padding(10)
-          .background(Color(UIColor.systemBackground))
-          .clipShape(RoundedRectangle(cornerRadius: 30))
-          .overlay(RoundedRectangle(cornerRadius: 30)
-                    .stroke(lineWidth: recording ? 5 : 2)
-                    .foregroundColor(recording ? .red : .secondary)
-          )
+      Image(systemName: recording ? "stop.fill" : "mic.fill")
+        .resizable()
+        .scaledToFit()
+        .frame(width: 30, height: 30)
+        .padding(10)
+        .background(Color(UIColor.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 30))
+        .overlay(RoundedRectangle(cornerRadius: 30)
+                  .stroke(lineWidth: recording ? 5 : 2)
+                  .foregroundColor(recording ? .red : .secondary)
+        )
     }
     .foregroundColor(.red)
   }
@@ -163,6 +176,7 @@ struct ContentView: View {
       offsets.map {todos[$0]}.forEach(viewContext.delete)
       do {
         try viewContext.save()
+        print("Deleted")
       } catch {
         print(error.localizedDescription)
       }
@@ -171,7 +185,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }
