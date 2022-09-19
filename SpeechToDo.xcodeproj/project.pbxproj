@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36C1F91A28D8FFB600F4487A /* ToDoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1F91928D8FFB600F4487A /* ToDoItemView.swift */; };
 		36E92C6128D4B9E70058C7E5 /* SpeechToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C6028D4B9E70058C7E5 /* SpeechToDoApp.swift */; };
 		36E92C6328D4B9E70058C7E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E92C6228D4B9E70058C7E5 /* ContentView.swift */; };
 		36E92C6528D4B9EF0058C7E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36E92C6428D4B9EF0058C7E5 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36C1F91928D8FFB600F4487A /* ToDoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemView.swift; sourceTree = "<group>"; };
 		36E92C5D28D4B9E70058C7E5 /* SpeechToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E92C6028D4B9E70058C7E5 /* SpeechToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToDoApp.swift; sourceTree = "<group>"; };
 		36E92C6228D4B9E70058C7E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				36E92C6228D4B9E70058C7E5 /* ContentView.swift */,
+				36C1F91928D8FFB600F4487A /* ToDoItemView.swift */,
 			);
 			path = "View's";
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			files = (
 				36E92C7A28D4F5610058C7E5 /* VisualBarView.swift in Sources */,
 				36E92C7828D4EEE00058C7E5 /* MicManager.swift in Sources */,
+				36C1F91A28D8FFB600F4487A /* ToDoItemView.swift in Sources */,
 				36E92C6A28D4B9EF0058C7E5 /* Persistence.swift in Sources */,
 				36E92C6D28D4B9EF0058C7E5 /* SpeechToDo.xcdatamodeld in Sources */,
 				36E92C6328D4B9E70058C7E5 /* ContentView.swift in Sources */,

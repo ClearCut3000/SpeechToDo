@@ -30,19 +30,9 @@ struct ContentView: View {
       ZStack(alignment: .bottom) {
         List {
           ForEach(todos) { item in
-            HStack {
-              Image(systemName: "\(todos.firstIndex(of: item) ?? 0).circle.fill")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .padding(.trailing, 10)
-                .foregroundColor(.red)
-              VStack {
-                Text(item.text ?? " - E M P T Y - ")
-                  .font(.headline)
-                Text(item.created?.formatted(date: .numeric, time: .shortened) ?? "n/a")
-                  .font(.caption2)
-              }
-            }
+            ToDoItemView(index: todos.firstIndex(of: item) ?? 0,
+                         text: item.text ?? " - E M P T Y - ",
+                         date: item.created?.formatted(date: .numeric, time: .shortened) ?? "n/a")
           }
           .onDelete(perform: deleteItems)
         }
