@@ -4,7 +4,7 @@ SwiftUI ToDo app with speech recognition and CoreData persistence with Sound Vis
 # Topics
 - SwiftUI
 - CoreData
-- Speech
+- Speech (speech recognition & speech-to-text)
 - AVFoundation
 - AVAudioEngine
 - AVAudioRecorder
